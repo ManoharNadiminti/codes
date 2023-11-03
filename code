@@ -1,0 +1,93 @@
+package com.lbrce.cse;
+
+import java.util.ResourceBundle;
+
+public class UserValidation {
+	public boolean check(String inUID,String inPSW)
+	{
+		ResourceBundle rb=ResourceBundle.getBundle("config");
+		String UID=rb.getString("uname");
+		String PSW=rb.getString("psw");
+		if(inUID.equals(UID)&&inPSW.equals(PSW))
+			return true;
+		else
+			return false;
+	}
+}
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+uname=raki
+psw=raki@123
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+package com.lbrce.cse;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class UserValidationTest {
+	@Test
+	public void testCase1()
+	{
+		UserValidation uv=new UserValidation();
+		Assert.assertEquals(false,uv.check("", ""));
+	}
+	@Test
+	public void testCase2()
+	{
+		UserValidation uv=new UserValidation();
+		Assert.assertEquals(true,uv.check("raki", "raki@123"));
+	}
+	@Test
+	public void testCase3()
+	{
+		UserValidation uv=new UserValidation();
+		Assert.assertEquals(false,uv.check("srinu", "srinu@12345"));
+	}
+	@Test
+	public void testCase4()
+	{
+		UserValidation uv=new UserValidation();
+		Assert.assertEquals(false,uv.check("SRINU", "SRINU@12345"));
+	}
+	@Test
+	public void testCase5()
+	{
+		UserValidation uv=new UserValidation();
+		Assert.assertEquals(false,uv.check("srinu", "srinu212345"));
+	}
+
+}
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>lbrce</groupId>
+  <artifactId>cse</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <dependencies>
+	  <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+		    <groupId>org.testng</groupId>
+		    <artifactId>testng</artifactId>
+		    <version>7.8.0</version>
+		    <scope>test</scope>
+		</dependency>
+
+  </dependencies>
+  
+</project>
